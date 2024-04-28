@@ -1,8 +1,8 @@
  
     
 function enhancedFrame=processVideo(desiredTime, i)    
-    % Read the video file
-    videoFile = 'video12.mp4'; % Replace 'input_video.mp4' with the filename of your video
+   
+    videoFile = 'video12.mp4'; 
     vidObj = VideoReader(videoFile);
     
      vidObj.CurrentTime = desiredTime;
@@ -23,14 +23,14 @@ function enhancedFrame=processVideo(desiredTime, i)
     imshow(enhancedFrame);
     title('Enhanced Frame');
 end
-Image1 = processVideo(9,1); 
-Image2 = processVideo(16,2); 
+Image1 = processVideo(9,1); % Sample fram at a particular time
+Image2 = processVideo(16,2); % Reference frame of an empty road
 Image2 = imresize(Image2, size(Image1));
 
-% Perform edge detection (e.g., using Canny edge detection)
+% Perform edge detection (using Canny edge detection)
 edges1 = edge(Image1, 'Canny');
 edges2 = edge(Image2, 'Canny');
-%figure;
+
 subplot(2,2,3);
 imshow(edges1);
 title('Sample frame');
@@ -49,7 +49,7 @@ if percentageMatch >= 90
 elseif percentageMatch >= 80
     density = 'Medium';
 else
-    density = 'high';
+    density = 'High';
 end
 
 disp(['Percentage Match: ', num2str(percentageMatch), '%']);
